@@ -7,4 +7,5 @@ createNewArticle,getAllArticles ,getArticlesByAuthor}
 
   articlesRouter.post("/articles",createNewArticle );
   articlesRouter.get("/articles",getAllArticles );
+  articlesRouter.get("/articles/search_1/:authorId",getArticlesByAuthor );
 module.exports = articlesRouter;

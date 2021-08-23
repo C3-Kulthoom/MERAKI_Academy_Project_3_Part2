@@ -40,13 +40,13 @@ const getAllArticles  =(req,res)=>{
 
 
 const getArticlesByAuthor  =(req,res)=>{
-
-    articlesModel.find({})
+const author =req.params.authorId 
+    articlesModel.find({author:author})
     .then((result) => {
-      res.status(200).json({success:true , massage:"all the articles" , articles : result});
+      res.status(200).json({success:true , massage:`all the articles by => ${author}` , articles : result});
     })
     .catch((err) => {
-        res.status(500).json({success: false, massage:"server error"  });
+        res.status(404).json({success: false, massage:"the author not found "  });
     });
 
 }
