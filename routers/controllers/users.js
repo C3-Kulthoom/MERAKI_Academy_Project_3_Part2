@@ -11,7 +11,7 @@ const createNewAuthor =(req, res)=>{
      
  } = req.body;
       
-    const auther = new usersModel({
+    const User = new usersModel({
     firstName,
     lastName,
     age,
@@ -19,7 +19,7 @@ const createNewAuthor =(req, res)=>{
     password 
     });
   
-    auther
+    User
       .save()
       .then((result) => {
         res.status(201).json({success:true , massage:"Success Author Added author" , author : result});

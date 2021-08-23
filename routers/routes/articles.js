@@ -1,8 +1,9 @@
 const express = require("express");
-const {
-  
-  }  = require('../controllers/articles');
+const 
+createNewArticle
+    = require('../controllers/articles');
   const articlesRouter = express.Router();
 
-//   articlesRouter.post("", );
+
+  articlesRouter.post("/articles",createNewArticle );
 module.exports = articlesRouter;
