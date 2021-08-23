@@ -25,15 +25,35 @@ const articlesModel = require("../../db/models/articlesschema");
       };
  
 
+const getAllArticles  =(req,res)=>{
+
+    articlesModel.find({})
+    .then((result) => {
+      res.status(200).json({success:true , massage:"all the articles" , articles : result});
+    })
+    .catch((err) => {
+        res.status(500).json({success: false, massage:"server error"  });
+    });
+
+}
 
 
 
+const getArticlesByAuthor  =(req,res)=>{
 
+    articlesModel.find({})
+    .then((result) => {
+      res.status(200).json({success:true , massage:"all the articles" , articles : result});
+    })
+    .catch((err) => {
+        res.status(500).json({success: false, massage:"server error"  });
+    });
 
+}
 
 
 
 
 
  
- module.exports = createNewArticle;
+ module.exports = {createNewArticle ,getAllArticles ,getArticlesByAuthor }
