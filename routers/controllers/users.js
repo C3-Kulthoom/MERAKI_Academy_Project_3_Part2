@@ -29,19 +29,7 @@ const createNewAuthor =(req, res)=>{
       });
   };
 
-const login  =(req,res)=> {
-  usedemail=req.body.email
-  usedpassword=req.body.password
-
-  usersModel.find({email:usedemail ,password:usedpassword})
-  .then((result) => {
-    res.status(200).json({success:true , massage:"Valid login credentials" });
-  })
-  .catch((err) => {
-      res.status(401).json({success: false, massage:"Invalid login credentials"  });
-  });
-
-}
 
 
-  module.exports = {createNewAuthor ,login }
+
+  module.exports = createNewAuthor 
