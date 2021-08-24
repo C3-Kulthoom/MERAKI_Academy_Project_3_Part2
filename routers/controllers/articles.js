@@ -80,6 +80,29 @@ const articleId =req.params.id
     res.status(404).json({success: false, massage:"The Article Not Found "  });
   })
  }
+const  deleteArticleById =(req,res)=>{ 
+  const articleid = req.params.id
+  articlesModel.findByIdAndDelete({_id:articleid}).then((result)=>{
+    // console.log(result)
+    res.status(200).json({success:true , massage:` Success Delete article with id => ${articleid}`, articles : result});
+   }).catch((error)=>{
+    // console.log(error)
+    res.status(404).json({success: false, massage:`Not Found atricle with id => ${articleid}`});
+  })
+
+}
+const  deleteArticlesByAuthor =(req,res)=>{ 
+  const author = req.body.author 
+  articlesModel.deleteMany({author:author}).then((result)=>{
+    // console.log(result)
+    res.status(200).json({success:true , massage:` Success delete all the articles for the author=> ${author}`, result : result});
+   }).catch((error)=>{
+    // console.log(error)
+    res.status(404).json({success: false, massage:`Success delete all the articles for the author => ${author}`});
+  })
+
+}
+
 
  
  
@@ -88,4 +111,5 @@ const articleId =req.params.id
 
  module.exports = {createNewArticle 
   ,getAllArticles ,getArticlesByAuthor 
-  ,getAnArticleById  ,updateAnArticleById}
+  ,getAnArticleById  ,updateAnArticleById,
+  deleteArticleById ,deleteArticlesByAuthor}
