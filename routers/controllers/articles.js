@@ -52,8 +52,30 @@ const author =req.params.authorId
 }
 
 
+const  getAnArticleById  =(req,res)=>{
+const author =req.params.authorId 
+    articlesModel.find({author:author} ).populate("User firstName").exec()
+    .then((result) => {
+      res.status(200).json({success:true , massage:`The article => ${author}` , articles : result});
+    })
+    .catch((err) => {
+        res.status(404).json({success: false, massage:"the author not found "  });
+    });
 
+}
 
+ const updateAnArticleById  =(req,res)=>{
 
+  const id = req.params.id
+  articlesModel.findOneAndUpdate({_id:id} , {task:req.body.} , (error, data )=>{
+        if (error){
+            console.log(error)
+        } else {console.log(data)}
+   }) .then((result)=>{
+      res.json(result)
+   }) .catch((error)=>{
+       console.log(error);
+   })
+ }
  
- module.exports = {createNewArticle ,getAllArticles ,getArticlesByAuthor }
+ module.exports = {createNewArticle ,getAllArticles ,getArticlesByAuthor ,getAnArticleById  ,updateAnArticleById}
