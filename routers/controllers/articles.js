@@ -54,7 +54,7 @@ const author =req.params.authorId
 
 const  getAnArticleById  =(req,res)=>{
 const author =req.params.authorId 
-    articlesModel.find({author:author} ).populate("User firstName").exec()
+    articlesModel.find({author:author}).populate("author" ," firstName").exec()
     .then((result) => {
       res.status(200).json({success:true , massage:`The article => ${author}` , articles : result});
     })
@@ -67,7 +67,7 @@ const author =req.params.authorId
  const updateAnArticleById  =(req,res)=>{
 
   const id = req.params.id
-  articlesModel.findOneAndUpdate({_id:id} , {task:req.body.} , (error, data )=>{
+  articlesModel.findOneAndUpdate({_id:id} , {task:req.body.task} , (error, data )=>{
         if (error){
             console.log(error)
         } else {console.log(data)}
@@ -78,4 +78,6 @@ const author =req.params.authorId
    })
  }
  
- module.exports = {createNewArticle ,getAllArticles ,getArticlesByAuthor ,getAnArticleById  ,updateAnArticleById}
+ module.exports = {createNewArticle 
+  ,getAllArticles ,getArticlesByAuthor 
+  ,getAnArticleById  ,updateAnArticleById}
