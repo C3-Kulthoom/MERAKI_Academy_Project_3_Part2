@@ -53,31 +53,39 @@ const author =req.params.authorId
 
 
 const  getAnArticleById  =(req,res)=>{
-const author =req.params.authorId 
-    articlesModel.find({author:author}).populate("author" ," firstName").exec()
+const articleId =req.params.id
+
+    articlesModel.findById(articleId).populate("author" ," firstName").exec()
     .then((result) => {
-      res.status(200).json({success:true , massage:`The article => ${author}` , articles : result});
+      // if(!result){
+      //   return res.status(404).json({success:false , massage:`The article`});
+      // }
+      res.status(200).json({success:true , massage:`The article => ${articleId}` , articles : result});
     })
     .catch((err) => {
-        res.status(404).json({success: false, massage:"the author not found "  });
+        res.status(500).json({success: false, massage:"The Article Not Found "  });
     });
 
 }
 
  const updateAnArticleById  =(req,res)=>{
 
-  const id = req.params.id
-  articlesModel.findOneAndUpdate({_id:id} , {task:req.body.task} , (error, data )=>{
-        if (error){
-            console.log(error)
-        } else {console.log(data)}
-   }) .then((result)=>{
-      res.json(result)
-   }) .catch((error)=>{
-       console.log(error);
-   })
+  const articleid = req.params.id
+// console.log(articleid)
+  articlesModel.findByIdAndUpdate({_id:articleid} , req.body).then((result)=>{
+    // console.log(result)
+    res.status(200).json({success:true , massage:`success article updated`, articles : result});
+   }).catch((error)=>{
+    // console.log(error)
+    res.status(404).json({success: false, massage:"The Article Not Found "  });
+  })
  }
+
  
+ 
+
+
+
  module.exports = {createNewArticle 
   ,getAllArticles ,getArticlesByAuthor 
   ,getAnArticleById  ,updateAnArticleById}
