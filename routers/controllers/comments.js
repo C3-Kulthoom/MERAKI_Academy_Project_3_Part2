@@ -2,23 +2,22 @@ const Comment = require("../../db/models/commentsschema");
 const commentsModel = require("../../db/models/commentsschema");
 
 const createNewComment =(req, res)=>{
-    const {   
-        comments,
-        commenter
- } = req.body;
-      
+  const comment = req.body.comment 
+  const commenter =req.body.commenter
+
+ 
     const Comment = new commentsModel({
-        comments,
+        comment,
         commenter
     });
   
     Comment
       .save()
       .then((result) => {
-        res.status(201).json({success:true , massage:"Success Author Added author" , author : result});
+        res.status(201).json({success:true , massage:"the new comment added " , commenter : result });
       })
       .catch((err) => {
-        res.status(409).json({success:false  , massage:"The email already exists" });
+        res.status(500).json({success:false  , massage:"server error " });
       });
   };
 
