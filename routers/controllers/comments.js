@@ -1,9 +1,9 @@
-const Comment = require("../../db/models/commentsschema");
+// const Comment = require("../../db/models/commentsschema");
 const commentsModel = require("../../db/models/commentsschema");
 const createNewComment= (req,res)=>{
 const comment = req.body.comment
 const commenter = req.body.commenter
-const newComment = new commentModel({
+const newComment = new commentsModel({
     comment,
     commenter
 })
